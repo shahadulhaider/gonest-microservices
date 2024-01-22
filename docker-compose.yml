@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+  # MongoDB service
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    networks:
+      - opika-network
+    volumes:
+      - mongodb-data:/data/db
+
+  # Redis service
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - opika-network
+
+  # Node.js API service
+  nodejs-api:
+    build:
+      context: ./nodejs-api
+    env_file: ./nodejs-api/.env
+    environment:
+      - APP_PORT=$APP_PORT
+      - MONGO_DB_URI=$MONGO_DB_URI
+      - MONGO_DB_NAME=$MONGO_DB_NAME
+      - REDIS_HOST=$REDIS_HOST
+      - REDIS_PORT=$REDIS_PORT
+      - CACHE_TTL=$CACHE_TTL
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+      - redis
+    networks:
+      - opika-network
+
+  # Go Worker service
+  go-worker:
+    build:
+      context: ./go-worker
+    env_file: ./go-worker/.env
+    environment:
+      - MONGO_URI=$MONGO_URI
+      - DB_NAME=$DB_NAME
+      - COLLECTION_NAME=$COLLECTION_NAME
+      - CRON_INTERVAL=$CRON_INTERVAL
+    depends_on:
+      - mongodb
+    networks:
+      - opika-network
+
+networks:
+  opika-network:
+
+volumes:
+  mongodb-data:
+
