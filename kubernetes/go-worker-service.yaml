@@ -1,0 +1,12 @@
+# go-worker-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-worker-service
+spec:
+  selector:
+    app: go-worker
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

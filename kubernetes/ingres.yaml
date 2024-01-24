@@ -1,0 +1,24 @@
+# ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: microservices-ingress
+spec:
+  rules:
+  - host: opika.com # setup minikube ip in /etc/hosts
+    http:
+      paths:
+      - path: /nodejs-api
+        pathType: Prefix
+        backend:
+          service:
+            name: nodejs-api-service
+            port:
+              number: 80
+      - path: /go-worker
+        pathType: Prefix
+        backend:
+          service:
+            name: go-worker-service
+            port:
+              number: 80

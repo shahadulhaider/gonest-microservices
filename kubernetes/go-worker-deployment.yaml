@@ -1,0 +1,21 @@
+# go-worker-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-worker
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: go-worker
+  template:
+    metadata:
+      labels:
+        app: go-worker
+    spec:
+      containers:
+      - name: go-worker
+        image: opika-go-worker:v1
+        envFrom:
+        - configMapRef:
+            name: opika-config-map

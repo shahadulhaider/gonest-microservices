@@ -1,0 +1,21 @@
+# nodejs-api-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nodejs-api
+  template:
+    metadata:
+      labels:
+        app: nodejs-api
+    spec:
+      containers:
+      - name: nodejs-api
+        image: opika-nodejs-api:v1
+        envFrom:
+        - configMapRef:
+            name: opika-config-map
