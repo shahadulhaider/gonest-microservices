@@ -5,7 +5,7 @@ metadata:
   name: microservices-ingress
 spec:
   rules:
-  - host: opika.com # setup minikube ip in /etc/hosts
+  - host: gonest.com # setup minikube ip in /etc/hosts
     http:
       paths:
       - path: /nodejs-api

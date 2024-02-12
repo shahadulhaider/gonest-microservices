@@ -128,7 +128,7 @@ docker-compose up
    - Access Services: Test your services using the provided endpoints:
    
      - Node.js API: `curl http://localhost:3000/api/users`
-     - Go Worker: `docker logs opika-go-worker-1`
+     - Go Worker: `docker logs gonest-go-worker-1`
 
 ## Deployment Using Kubernetes (Minikube)
 

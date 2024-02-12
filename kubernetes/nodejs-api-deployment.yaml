@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: nodejs-api
-        image: opika-nodejs-api:v1
+        image: gonest-nodejs-api:v1
         envFrom:
         - configMapRef:
-            name: opika-config-map
+            name: gonest-config-map
