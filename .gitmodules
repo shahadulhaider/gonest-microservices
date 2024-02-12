@@ -1,3 +1,6 @@
 [submodule "go-worker"]
 	path = go-worker
 	url = git@github.com:shahadulhaider/go-worker.git
+[submodule "nodejs-api"]
+	path = nodejs-api
+	url = git@github.com:shahadulhaider/nodejs-api.git
